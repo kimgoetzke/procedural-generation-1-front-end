@@ -1,0 +1,11 @@
+.text-field-values {
+    @apply text-orange-400 font-medium text-lg;
+}
+
+.text-non-field-values {
+    @apply text-neutral-300 font-bold;
+}
+
+.text-action {
+    @apply text-neutral-600;
+}
