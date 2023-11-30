@@ -21,7 +21,7 @@ export async function GET(request: Request): Promise<Response> {
     //     }
     // });
     // const data = await response.json() as WebResponse;
-    const data = body as WebResponse;
+    const data = body as unknown as WebResponse;
     const webPlayer = toWebPlayer(data);
     cookies().set({
         name: 'webPlayer',
@@ -45,7 +45,7 @@ export async function POST(request: Request): Promise<Response> {
     //     body: JSON.stringify(request.body)
     // });
     // const data = await response.json() as WebResponse;
-    const data = body as WebResponse;
+    const data = body as unknown as WebResponse;
     const webPlayer = toWebPlayer(data);
     cookies().set({
         name: 'webPlayer',
@@ -58,7 +58,7 @@ export async function POST(request: Request): Promise<Response> {
 }
 
 const body = {
-    "viewType": "DEFAULT",
+    "viewType": "ENCOUNTER_SUMMARY",
     "actions": [
         {
             "index": 1,
@@ -81,8 +81,185 @@ const body = {
             "name": "Show debug menu"
         }
     ],
-    "encounterSummary": null,
-    "interactions": null,
+    "encounterSummary": {
+        "playerHadInitiative": true,
+        "playerHasWon": true,
+        "enemiesDefeated": [
+            {
+                "name": "Large imp",
+                "type": "IMP",
+                "health": 0,
+                "level": 1
+            },
+            {
+                "name": "Purple imp",
+                "type": "IMP",
+                "health": 0,
+                "level": 1
+            }
+        ],
+        "attackers": [
+            {
+                "name": "player1",
+                "type": "PLAYER",
+                "health": 100,
+                "level": 1
+            }
+        ],
+        "defenders": [
+            {
+                "name": "Large imp",
+                "type": "IMP",
+                "health": 8,
+                "level": 1
+            },
+            {
+                "name": "Purple imp",
+                "type": "IMP",
+                "health": 10,
+                "level": 1
+            }
+        ],
+        "records": [
+            {
+                "attackerName": "player1",
+                "damage": 1,
+                "targetName": "Purple imp",
+                "health": 9,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 1,
+                "targetName": "player1",
+                "health": 99,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Purple imp",
+                "damage": 1,
+                "targetName": "player1",
+                "health": 98,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 3,
+                "targetName": "Purple imp",
+                "health": 6,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 2,
+                "targetName": "player1",
+                "health": 96,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Purple imp",
+                "damage": 2,
+                "targetName": "player1",
+                "health": 94,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 1,
+                "targetName": "Purple imp",
+                "health": 5,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 1,
+                "targetName": "player1",
+                "health": 93,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Purple imp",
+                "damage": 1,
+                "targetName": "player1",
+                "health": 92,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 2,
+                "targetName": "Purple imp",
+                "health": 3,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 2,
+                "targetName": "player1",
+                "health": 90,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Purple imp",
+                "damage": 2,
+                "targetName": "player1",
+                "health": 88,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 3,
+                "targetName": "Purple imp",
+                "health": 0,
+                "isAlive": false
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 0,
+                "targetName": "player1",
+                "health": 88,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 2,
+                "targetName": "Large imp",
+                "health": 6,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 1,
+                "targetName": "player1",
+                "health": 87,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 3,
+                "targetName": "Large imp",
+                "health": 3,
+                "isAlive": true
+            },
+            {
+                "attackerName": "Large imp",
+                "damage": 2,
+                "targetName": "player1",
+                "health": 85,
+                "isAlive": true
+            },
+            {
+                "attackerName": "player1",
+                "damage": 4,
+                "targetName": "Large imp",
+                "health": 0,
+                "isAlive": false
+            }
+        ]
+    },
+    "interactions": [
+        "Hey, sht! Come over here. I need you to do something for me.",
+        "I need you to get this small parcel to Seti Tefnut at Thyrvera Field. Don't ask questions and I'll pay you well. You in?"
+    ],
     "player": {
         "id": "PLA~PLAYER1@1277912753",
         "name": "player1",

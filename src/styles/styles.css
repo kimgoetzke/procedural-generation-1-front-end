@@ -2,10 +2,26 @@
     @apply text-orange-400 font-medium text-lg;
 }
 
+.text-field-values-small {
+    @apply text-orange-400 font-medium text-sm;
+}
+
 .text-non-field-values {
     @apply text-neutral-300 font-bold;
 }
 
 .text-action {
     @apply text-neutral-600;
+}
+
+.text-standard {
+    @apply text-neutral-500 font-medium text-lg;
+}
+
+.heading-standard {
+    @apply text-orange-600 font-bold uppercase;
+}
+
+.text-list-item {
+    @apply text-neutral-500 font-medium text-sm;
 }

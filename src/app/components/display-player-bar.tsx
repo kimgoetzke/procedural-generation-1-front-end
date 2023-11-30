@@ -5,11 +5,11 @@ export function DisplayPlayerBar({player}: Readonly<{ player: Player }>) {
     return (
         <div className="w-full mt-9">
             <div className="flex justify-center mb-2"><span
-                className="text-orange-500 font-black">{player.name.toUpperCase()}</span></div>
+                className="heading-standard">{player.name.toUpperCase()}</span></div>
             <div className="w-full mb-2 border-t-4 border-natural-600"></div>
             <div className="grid grid-cols-1 lg:grid-cols-5 items-center mb-2">
                 <div className="text-non-field-values lg:text-left text-center">
-                    <div>{`HEALTH`}</div>
+                    <div>{`HEALTH POINTS`}</div>
                     <div className="text-field-values">{`${player.health} / ${player.maxHealth}`}</div>
                 </div>
                 <div className="text-non-field-values text-center">
