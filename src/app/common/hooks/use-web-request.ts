@@ -4,6 +4,9 @@ import {WebResponse} from "@/app/common/models/web-response";
 import {useCookies} from 'next-client-cookies';
 import {WebPlayer} from "@/app/common/models/web-player";
 
+export const revalidate = false;
+export const dynamic = 'force-static';
+
 const getFetcher = async () => {
     const res = await fetch(`/api/play`, {
         method: 'GET',
@@ -25,7 +28,7 @@ const postFetcher = async (webRequest: WebRequest) => {
     return await res.json();
 };
 
-export function useWebRequest() {
+export function useWebRequest(choice?: number | undefined) {
     const cookies = useCookies();
     const webPlayer = cookies.get('webPlayer') as unknown as WebPlayer;
     console.log("useWebRequest() >> webPlayer =", webPlayer);

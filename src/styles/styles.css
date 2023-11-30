@@ -14,14 +14,18 @@
     @apply text-neutral-600;
 }
 
-.text-standard {
+.standard-text {
     @apply text-neutral-500 font-medium text-lg;
 }
 
-.heading-standard {
+.standard-heading {
     @apply text-orange-600 font-bold uppercase;
 }
 
-.text-list-item {
+.standard-list-item {
     @apply text-neutral-500 font-medium text-sm;
+}
+
+.standard-button {
+    @apply text-neutral-100 rounded-xl bg-amber-300 uppercase transform transition-all duration-500 hover:bg-amber-500 hover:scale-110;
 }

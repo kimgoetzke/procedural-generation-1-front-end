@@ -7,7 +7,7 @@ export function DisplayInteractions({interactions}: Readonly<{ interactions: str
             <ul className="w-full list-none">
                 {interactions.map((interaction: string, index: number) => (
                     <li key={index} className="mb-2">
-                        <span className="text-standard">{interaction}</span>
+                        <span className="standard-text">{interaction}</span>
                     </li>
                 ))}
             </ul>

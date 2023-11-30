@@ -3,6 +3,7 @@ import {Inter} from 'next/font/google'
 import './globals.css'
 import React from "react";
 import {CookiesProvider} from 'next-client-cookies/server';
+import {WebRequestProvider} from "@/app/common/providers/web-request-provider";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -16,7 +17,9 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <html lang="en">
         <body className={inter.className}>
         <CookiesProvider>
-            {children}
+            <WebRequestProvider>
+                {children}
+            </WebRequestProvider>
         </CookiesProvider>
         </body>
         </html>

@@ -5,7 +5,7 @@ export function DisplayPlayerBar({player}: Readonly<{ player: Player }>) {
     return (
         <div className="w-full mt-9">
             <div className="flex justify-center mb-2"><span
-                className="heading-standard">{player.name.toUpperCase()}</span></div>
+                className="standard-heading">{player.name.toUpperCase()}</span></div>
             <div className="w-full mb-2 border-t-4 border-natural-600"></div>
             <div className="grid grid-cols-1 lg:grid-cols-5 items-center mb-2">
                 <div className="text-non-field-values lg:text-left text-center">
