@@ -1,4 +1,4 @@
-import {WebResponse} from "@/app/common/models/web-response";
+import {WebResponse} from "@/lib/models/WebResponse";
 
 export type WebPlayer = {
     id: string

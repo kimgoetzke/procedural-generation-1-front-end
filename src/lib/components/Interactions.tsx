@@ -1,6 +1,4 @@
-import '@/styles/styles.css';
-
-export function DisplayInteractions({interactions}: Readonly<{ interactions: string[] }>) {
+export function Interactions({interactions}: Readonly<{ interactions: string[] }>) {
     console.log("DisplayInteractions interactions =", interactions);
     return (
         <div className="bg-neutral-300 rounded-2xl p-4 mb-9">

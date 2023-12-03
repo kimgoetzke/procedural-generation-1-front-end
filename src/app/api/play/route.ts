@@ -1,8 +1,8 @@
 import {NextResponse} from "next/server";
 import {cookies} from "next/headers";
-import {ONE_DAY_IN_MILLISECONDS} from "@/app/common/constants";
-import {toWebPlayer} from "@/app/common/models/web-player";
-import {WebResponse} from "@/app/common/models/web-response";
+import {ONE_DAY_IN_MILLISECONDS} from "@/lib/constants";
+import {toWebPlayer} from "@/lib/models/WebPlayer";
+import {WebResponse} from "@/lib/models/WebResponse";
 
 const getCredentials = (): string => {
     const username = 'player1';
@@ -15,6 +15,7 @@ export async function GET(request: Request): Promise<Response> {
     // TODO: Make authenticated GET call to backend to get webResponse
     // const base64Credentials = getCredentials();
     // const response = await fetch("http://localhost:8080/api/play", {
+    //     next: { revalidate: false },
     //     method: 'GET',
     //     headers: {
     //         'Authorization': `Basic ${base64Credentials}`
@@ -34,10 +35,13 @@ export async function GET(request: Request): Promise<Response> {
 }
 
 export async function POST(request: Request): Promise<Response> {
-    console.log("Making POST request with body =", request.body);
+    const requestBody = await request.json();
+    // const body = await request.();
+    console.log("Making POST request with body =", requestBody);
     // TODO: Make authenticated GET call to backend to get webResponse
     // const base64Credentials = getCredentials();
     // const response = await fetch("http://localhost:8080/api/play", {
+    //     next: { revalidate: false },
     //     method: 'POST',
     //     headers: {
     //         'Authorization': `Basic ${base64Credentials}`

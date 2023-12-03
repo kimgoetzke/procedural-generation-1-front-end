@@ -1,9 +1,11 @@
 import type {Metadata} from 'next'
 import {Inter} from 'next/font/google'
 import './globals.css'
+import '@/styles/styles.css';
 import React from "react";
 import {CookiesProvider} from 'next-client-cookies/server';
-import {WebRequestProvider} from "@/app/common/providers/web-request-provider";
+import {WebResponseProvider} from "@/lib/context/web-response-context";
+import {WebRequestProvider} from "@/lib/context/web-request-context";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -18,7 +20,9 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <body className={inter.className}>
         <CookiesProvider>
             <WebRequestProvider>
-                {children}
+                <WebResponseProvider>
+                    {children}
+                </WebResponseProvider>
             </WebRequestProvider>
         </CookiesProvider>
         </body>

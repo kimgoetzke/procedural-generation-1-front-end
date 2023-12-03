@@ -1,7 +1,6 @@
-import {Player} from "@/app/common/models/web-response";
-import '@/styles/styles.css';
+import {Player} from "@/lib/models/WebResponse";
 
-export function DisplayPlayerBar({player}: Readonly<{ player: Player }>) {
+export function PlayerBar({player}: Readonly<{ player: Player }>) {
     return (
         <div className="w-full mt-9">
             <div className="flex justify-center mb-2"><span

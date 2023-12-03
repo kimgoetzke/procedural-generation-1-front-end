@@ -1,4 +1,4 @@
-import {Combatant} from "@/app/common/models/web-response";
+import {Combatant} from "@/lib/models/WebResponse";
 
 export const CombatantList = ({combatants, title}: { combatants: Combatant[], title: string }) => (
     <div>

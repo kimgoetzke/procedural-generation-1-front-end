@@ -1,8 +1,7 @@
-import {EncounterSummary} from "@/app/common/models/web-response";
-import '@/styles/styles.css';
-import {CombatantList} from "@/app/components/combatant-list";
+import {EncounterSummary} from "@/lib/models/WebResponse";
+import {CombatantList} from "@/lib/components/CombatantList";
 
-export function DisplayEncounterSummary({encounterSummary}: Readonly<{ encounterSummary: EncounterSummary }>) {
+export function EncounterSummary({encounterSummary}: Readonly<{ encounterSummary: EncounterSummary }>) {
     return (
         <>
             <div className="w-full bg-neutral-300 rounded-2xl p-4 mb-9">

@@ -1,7 +1,7 @@
 export type WebResponse = {
     viewType: ViewType;
     actions: Action[];
-    encounterSummary: any;
+    encounterSummary: EncounterSummary;
     interactions: string[];
     player: Player;
 }
