@@ -2,12 +2,13 @@ import {Action} from "@/lib/models/WebResponse";
 import {useRouter} from "next/navigation";
 import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 import {WebRequest} from "@/lib/models/WebRequest";
+import {useWebRequest} from "@/lib/context/web-request-context";
 
-export function ActionsList({actions, playerId, setWebRequest}: Readonly<{
+export function ActionsList({actions, playerId}: Readonly<{
     actions: Action[],
-    playerId: string,
-    setWebRequest?: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void
+    playerId: string
 }>) {
+    const [, setWebRequest] = useWebRequest();
     const router = useRouter();
     return (
         <ul className="list-none text-left">
@@ -22,7 +23,11 @@ export function ActionsList({actions, playerId, setWebRequest}: Readonly<{
     );
 }
 
-const handleClick = (router: AppRouterInstance, index: number, playerId: string, setWebRequest?: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void) => {
+const handleClick = (
+    router: AppRouterInstance,
+    index: number, playerId: string,
+    setWebRequest?: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void
+) => {
     setWebRequest ? setWebRequest({choice: index, playerId}) : console.error('setWebRequest is undefined');
     router.push(`/play/continue?choice=${index}&playerId=${playerId}`);
 }

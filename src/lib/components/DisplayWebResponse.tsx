@@ -4,7 +4,6 @@ import {ActionsList} from "@/lib/components/ActionsList";
 import {PlayerBar} from "@/lib/components/PlayerBar";
 import {Interactions} from "@/lib/components/Interactions";
 import {EncounterSummary} from "@/lib/components/EncounterSummary";
-import {WebRequest} from "@/lib/models/WebRequest";
 
 export function DisplayWebResponse(webResponse: WebResponse | undefined, error?: any, isLoading?: boolean) {
     return (
@@ -19,15 +18,15 @@ export function DisplayWebResponse(webResponse: WebResponse | undefined, error?:
     );
 }
 
-export function DisplayPostWebResponse(webResponse: WebResponse | undefined, setWebRequest: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void) {
+export function DisplayPostWebResponse(webResponse: WebResponse | undefined) {
     return (
         <div className="w-full">
-            {webResponse ? Display(webResponse, setWebRequest) : 'Failed to load'}
+            {webResponse ? Display(webResponse) : 'Failed to load'}
         </div>
     );
 }
 
-const Display = (webResponse: WebResponse, setWebRequest?: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void) => {
+const Display = (webResponse: WebResponse) => {
     console.log("Rendering DisplayContent for ", webResponse?.viewType);
     const playerId = webResponse.player.id;
     switch (webResponse.viewType) {
@@ -36,7 +35,7 @@ const Display = (webResponse: WebResponse, setWebRequest?: (value: (((prevState:
                 <div className="w-full">
                     <h2 className="text-xl text-gray-400 flex justify-center mb-3">{webResponse.viewType}</h2>
                     <PlayerBar player={webResponse.player}/>
-                    <ActionsList actions={webResponse.actions} playerId={playerId} setWebRequest={setWebRequest}/>
+                    <ActionsList actions={webResponse.actions} playerId={playerId}/>
                 </div>
             );
         case ViewType.ENCOUNTER_SUMMARY:
@@ -45,7 +44,7 @@ const Display = (webResponse: WebResponse, setWebRequest?: (value: (((prevState:
                     <h2 className="text-xl text-gray-400 flex justify-center mb-3">{webResponse.viewType}</h2>
                     <PlayerBar player={webResponse.player}/>
                     <EncounterSummary encounterSummary={webResponse.encounterSummary}/>
-                    <ActionsList actions={webResponse.actions} playerId={playerId} setWebRequest={setWebRequest}/>
+                    <ActionsList actions={webResponse.actions} playerId={playerId}/>
                 </div>
             );
         case ViewType.DIALOGUE:
@@ -54,7 +53,7 @@ const Display = (webResponse: WebResponse, setWebRequest?: (value: (((prevState:
                     <h2 className="text-xl text-gray-400 flex justify-center mb-3">{webResponse.viewType}</h2>
                     <PlayerBar player={webResponse.player}/>
                     <Interactions interactions={webResponse.interactions}/>
-                    <ActionsList actions={webResponse.actions} playerId={playerId} setWebRequest={setWebRequest}/>
+                    <ActionsList actions={webResponse.actions} playerId={playerId}/>
                 </div>
             );
         default:
