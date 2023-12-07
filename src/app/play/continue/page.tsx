@@ -1,18 +1,18 @@
 "use client";
 
 import {DisplayPostWebResponse} from "@/lib/components/DisplayWebResponse";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {WebResponse} from "@/lib/models/WebResponse";
 import {useWebRequest} from "@/lib/context/web-request-context";
 import {useWebResponse} from "@/lib/context/web-response-context";
 
 export default function Continue() {
-    const [webRequest, ] = useWebRequest();
+    const [webRequest,] = useWebRequest();
     const [webResponse, setWebResponse] = useWebResponse();
 
     useEffect(() => {
         const fetchData = async () => {
-            console.log(`xxx1 = ${JSON.stringify(webRequest)}`);
+            console.log(`POST with ${JSON.stringify(webRequest)}`);
             await fetch(`/api/play`, {
                 method: 'POST',
                 headers: {
@@ -24,7 +24,7 @@ export default function Continue() {
                 .then(data => setWebResponse(data));
         }
         fetchData().catch(e => console.log(e));
-    }, [setWebResponse, webRequest]);
+    }, [webRequest]);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-start p-24">
@@ -32,7 +32,7 @@ export default function Continue() {
                 <h1 className="text-4xl text-gray-600 font-black">King of Castrop Rauxel</h1>
             </div>
             <div className="w-full items-start text-sm lg:flex">
-                {DisplayPostWebResponse(webResponse)}
+                <DisplayPostWebResponse webResponse={webResponse}/>
             </div>
         </main>
     )

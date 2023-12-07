@@ -5,7 +5,7 @@ import {getFetcher, staticConfig} from "@/lib/fetchers";
 import useSWR from "swr";
 import {WebResponse} from "@/lib/models/WebResponse";
 import {useWebResponse} from "@/lib/context/web-response-context";
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 
 const Start = () => {
     const [, setWebResponse] = useWebResponse();
@@ -23,7 +23,12 @@ const Start = () => {
                 <h1 className="text-4xl text-gray-600 font-black">King of Castrop Rauxel</h1>
             </div>
             <div className="w-full items-start text-sm lg:flex">
-                {DisplayWebResponse(data as WebResponse, error, isLoading)}
+                {isLoading ? 'Loading...' :
+                    <>
+                        {error && 'Failed to load'}
+                        {data && <DisplayWebResponse webResponse={data}/>}
+                    </>
+                }
             </div>
         </main>
     )
