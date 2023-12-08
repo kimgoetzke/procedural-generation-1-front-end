@@ -8,11 +8,11 @@ import {useWebResponse} from "@/lib/context/web-response-context";
 import React, {useEffect} from "react";
 
 const Start = () => {
-    const [, setWebResponse] = useWebResponse();
+    const [webResponse, setWebResponse] = useWebResponse();
     const {data, error, isLoading} = useSWR(`/api/play`, getFetcher, staticConfig());
 
     useEffect(() => {
-        if (data) {
+        if (data && !webResponse) {
             setWebResponse(data as WebResponse);
         }
     }, [data]);
@@ -25,7 +25,6 @@ const Start = () => {
             <div className="w-full items-start text-sm lg:flex">
                 {isLoading ? 'Loading...' :
                     <>
-                        {error && 'Failed to load'}
                         {data && <DisplayWebResponse webResponse={data}/>}
                     </>
                 }

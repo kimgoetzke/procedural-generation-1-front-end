@@ -5,22 +5,7 @@ import {PlayerBar} from "@/lib/components/PlayerBar";
 import {Interactions} from "@/lib/components/Interactions";
 import {EncounterSummary} from "@/lib/components/EncounterSummary";
 
-export function DisplayWebResponse({webResponse}: {
-    webResponse: WebResponse | undefined
-}, error?: any, isLoading?: boolean) {
-    return (
-        <div className="w-full">
-            {isLoading ? 'Loading...' :
-                <>
-                    {error && 'Failed to load'}
-                    {webResponse && <Display webResponse={webResponse}/>}
-                </>
-            }
-        </div>
-    );
-}
-
-export function DisplayPostWebResponse({webResponse}: { webResponse: WebResponse }) {
+export function DisplayWebResponse({webResponse}: { webResponse: WebResponse }) {
     return (
         <div className="w-full">
             {webResponse ? <Display webResponse={webResponse}/> : 'Failed to load'}

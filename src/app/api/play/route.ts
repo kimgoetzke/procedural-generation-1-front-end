@@ -3,6 +3,7 @@ import {cookies} from "next/headers";
 import {ONE_DAY_IN_MILLISECONDS} from "@/lib/constants";
 import {toWebPlayer} from "@/lib/models/WebPlayer";
 import {WebResponse} from "@/lib/models/WebResponse";
+import {WebRequest} from "@/lib/models/WebRequest";
 
 const getCredentials = (): string => {
     const username = 'player1';
@@ -10,7 +11,7 @@ const getCredentials = (): string => {
     return Buffer.from(`${username}:${password}`).toString('base64');
 };
 
-export async function GET(request: Request): Promise<Response> {
+export async function GET(): Promise<Response> {
     console.log("Making GET request");
     // TODO: Make authenticated GET call to backend to get webResponse
     // const base64Credentials = getCredentials();
@@ -35,8 +36,11 @@ export async function GET(request: Request): Promise<Response> {
 }
 
 export async function POST(request: Request): Promise<Response> {
-    const requestBody = await request.json();
-    // const body = await request.();
+    const requestBody = await request.json() as WebRequest;
+    if (!requestBody.playerId) {
+        console.log("No playerId in request body, returning null...");
+        return NextResponse.json(null);
+    }
     console.log("Making POST request with body =", requestBody);
     // TODO: Make authenticated GET call to backend to get webResponse
     // const base64Credentials = getCredentials();
