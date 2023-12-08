@@ -23,11 +23,7 @@ const Start = () => {
                 <h1 className="text-4xl text-gray-600 font-black">King of Castrop Rauxel</h1>
             </div>
             <div className="w-full items-start text-sm lg:flex">
-                {isLoading ? 'Loading...' :
-                    <>
-                        {data && <DisplayWebResponse webResponse={data}/>}
-                    </>
-                }
+                {isLoading ? 'Loading...' : <DisplayWebResponse webResponse={data}/>}
             </div>
         </main>
     )

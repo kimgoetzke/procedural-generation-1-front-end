@@ -22,7 +22,6 @@ export const getFetcher = async () => {
 };
 
 export const postFetcher = (webRequest: WebRequest) => async () => {
-    console.log("xxx postFetcher =", webRequest);
     const res = await fetch(`/api/play`, {
         method: 'POST',
         headers: {
