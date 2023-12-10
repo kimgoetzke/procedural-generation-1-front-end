@@ -40,7 +40,7 @@ export function ActionsList({actions, playerId}: Readonly<{
                 {actions.map((action: Action) => (
                     <div key={action.index} className="flex justify-between items-center">
                         <div className="flex-shrink-0 p-1 items-start">
-                            <Button className="standard-button text-secondary"
+                            <Button className="standard-button text-secondary font-black"
                                     onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
                                 {action.index}
                             </Button>

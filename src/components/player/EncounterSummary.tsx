@@ -29,11 +29,13 @@ export function EncounterSummary({encounterSummary}: Readonly<{ encounterSummary
                                     <ul>
                                         {encounterSummary.records.map((record, index) => (
                                             <li key={index} className="standard-list">
-                            <span
-                                className="standard-list-item">{`${record.attackerName.toUpperCase()} attacked ${record.targetName.toUpperCase()}, causing `}</span>
+                                                <span className="standard-list-item">
+                                                    {`${record.attackerName.toUpperCase()} attacked ${record.targetName.toUpperCase()}, causing `}
+                                                </span>
                                                 <span className="text-highlight">{record.damage}</span>
-                                                <span
-                                                    className="standard-list-item">{` damage - ${record.targetName.toUpperCase()} has `}</span>
+                                                <span className="standard-list-item">
+                                                    {` damage - ${record.targetName.toUpperCase()} has `}
+                                                </span>
                                                 <span className="text-highlight">{record.health}</span>
                                                 <span className="standard-list-item">{` health left`}</span>
                                             </li>
