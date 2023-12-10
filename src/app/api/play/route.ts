@@ -42,7 +42,7 @@ export async function POST(request: Request): Promise<Response> {
         return NextResponse.json(null);
     }
     console.log("Making POST request with body =", requestBody);
-    // TODO: Make authenticated GET call to backend to get webResponse
+    // TODO: Make authenticated POST call to backend to get webResponse
     // const base64Credentials = getCredentials();
     // const response = await fetch("http://localhost:8080/api/play", {
     //     next: { revalidate: false },

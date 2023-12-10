@@ -4,8 +4,11 @@ import {ActionsList} from "@/lib/components/ActionsList";
 import {PlayerBar} from "@/lib/components/PlayerBar";
 import {Interactions} from "@/lib/components/Interactions";
 import {EncounterSummary} from "@/lib/components/EncounterSummary";
+import {useWebResponse} from "@/lib/context/web-response-context";
 
-export function DisplayWebResponse({webResponse}: { webResponse: WebResponse }) {
+export function DisplayWebResponse() {
+    const [webResponse,] = useWebResponse();
+
     return (
         <div className="w-full">
             {webResponse ? <Display webResponse={webResponse}/> : 'Failed to load'}
