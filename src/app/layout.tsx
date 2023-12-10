@@ -5,6 +5,8 @@ import '@/styles/styles.css';
 import React from "react";
 import {CookiesProvider} from 'next-client-cookies/server';
 import {WebRequestProvider} from "@/lib/context/web-request-context";
+import {ThemeProvider} from "@/lib/theme-provider";
+import {NavBar} from "@/components/ui/nav-bar";
 
 const inter = Inter({subsets: ['latin']})
 
@@ -15,13 +17,21 @@ export const metadata: Metadata = {
 
 export default function RootLayout({children}: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
+        <html lang="en" suppressHydrationWarning={true}>
         <body className={inter.className}>
-        <CookiesProvider>
-            <WebRequestProvider>
-                {children}
-            </WebRequestProvider>
-        </CookiesProvider>
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+        >
+            <CookiesProvider>
+                <NavBar/>
+                <WebRequestProvider>
+                    {children}
+                </WebRequestProvider>
+            </CookiesProvider>
+        </ThemeProvider>
         </body>
         </html>
     )

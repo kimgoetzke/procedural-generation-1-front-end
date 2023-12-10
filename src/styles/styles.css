@@ -1,31 +1,51 @@
-.text-field-values {
-    @apply text-orange-400 font-medium text-lg;
+.standard-h1 {
+    @apply scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl;
 }
 
-.text-field-values-small {
-    @apply text-orange-400 font-medium text-sm;
+.standard-h2 {
+    @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
-.text-non-field-values {
-    @apply text-neutral-300 font-bold;
+.standard-h4 {
+    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+}
+
+.standard-p {
+    @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.text-highlight-player-bar {
+    @apply text-primary font-bold text-lg;
+}
+
+.text-highlight {
+    @apply text-primary font-medium;
 }
 
 .text-action {
-    @apply text-neutral-600;
+    @apply text-accent-foreground;
 }
 
-.standard-text {
-    @apply text-neutral-500 font-medium text-lg;
+.standard-list {
+    @apply my-3 ml-6 list-disc [&>li]:mt-2;
 }
 
-.standard-heading {
-    @apply text-orange-600 font-bold uppercase;
+.player-heading {
+    @apply text-primary font-bold uppercase;
 }
 
 .standard-list-item {
-    @apply text-neutral-500 font-medium text-sm;
+    @apply text-xs;
 }
 
 .standard-button {
-    @apply text-neutral-100 rounded-xl bg-amber-300 uppercase transform transition-all duration-500 hover:bg-amber-500 hover:scale-110;
+    @apply transform transition-all duration-500 hover:bg-secondary-foreground hover:scale-110;
+}
+
+.standard-inner-padding {
+    @apply p-3;
+}
+
+.standard-outer-padding {
+    @apply p-1;
 }

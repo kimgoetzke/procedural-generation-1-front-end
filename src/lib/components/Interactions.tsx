@@ -1,14 +1,16 @@
+import {Card} from "@/components/ui/card";
+
 export function Interactions({interactions}: Readonly<{ interactions: string[] }>) {
     console.log("DisplayInteractions interactions =", interactions);
     return (
-        <div className="bg-neutral-300 rounded-2xl p-4 mb-9">
-            <ul className="w-full list-none">
+        <div className="standard-outer-padding">
+            <Card className="standard-inner-padding bg-secondary">
                 {interactions.map((interaction: string, index: number) => (
-                    <li key={index} className="mb-2">
-                        <span className="standard-text">{interaction}</span>
-                    </li>
+                    <div key={index} className="standard-outer-padding">
+                        <p className="standard-p text-secondary-foreground italic">"{interaction}"</p>
+                    </div>
                 ))}
-            </ul>
+            </Card>
         </div>
     );
 }

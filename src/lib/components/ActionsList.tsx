@@ -5,6 +5,8 @@ import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useWebRequest} from "@/lib/context/web-request-context";
 import {WebRequest} from "@/lib/models/WebRequest";
+import {Button} from "@/components/ui/button";
+import {Card} from "@/components/ui/card";
 
 export function ActionsList({actions, playerId}: Readonly<{
     actions: Action[],
@@ -33,19 +35,25 @@ export function ActionsList({actions, playerId}: Readonly<{
     }, [shouldFetch]);
 
     return (
-        <ul className="list-none text-left">
-            {actions.map((action: Action) => (
-                <li key={action.index} className="mb-2">
-                    <button onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}
-                            className="font-bold text-lg w-8 h-8 mr-2 standard-button">{action.index}</button>
-                    <span className="text-action">{action.name}</span>
-                </li>
-            ))}
-        </ul>
+        <div className="standard-outer-padding">
+            <Card className="standard-inner-padding">
+                {actions.map((action: Action) => (
+                    <div key={action.index} className="flex justify-between items-center">
+                        <div className="flex-shrink-0 p-1 items-start">
+                            <Button className="standard-button"
+                                    onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
+                                {action.index}
+                            </Button>
+                        </div>
+                        <div className="flex-grow text-action pl-2 p-2">{action.name}</div>
+                    </div>
+                ))}
+            </Card>
+        </div>
     );
 }
 
-const handleClick = async (
+const handleClick = (
     index: number,
     playerId: string,
     setWebRequest: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void,
