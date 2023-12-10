@@ -4,21 +4,11 @@ import {ActionsList} from "@/lib/components/ActionsList";
 import {PlayerBar} from "@/lib/components/PlayerBar";
 import {Interactions} from "@/lib/components/Interactions";
 import {EncounterSummary} from "@/lib/components/EncounterSummary";
-import {useWebResponse} from "@/lib/context/web-response-context";
 
-export function DisplayWebResponse() {
-    const [webResponse,] = useWebResponse();
-
-    return (
-        <div className="w-full">
-            {webResponse ? <Display webResponse={webResponse}/> : 'Failed to load'}
-        </div>
-    );
-}
-
-const Display = ({webResponse}: { webResponse: WebResponse }) => {
+export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebResponse }>) {
     console.log(`Rendering DisplayContent for ${webResponse?.viewType}`);
     const playerId = webResponse.player.id;
+
     switch (webResponse.viewType) {
         case ViewType.DEFAULT:
             return (
@@ -49,4 +39,4 @@ const Display = ({webResponse}: { webResponse: WebResponse }) => {
         default:
             return ("Something went wrong.");
     }
-};
+}

@@ -2,12 +2,9 @@
 
 import '@/styles/styles.css';
 import {useEffect, useState} from "react";
-import {WebResponse} from "@/lib/models/WebResponse";
-import {useWebResponse} from "@/lib/context/web-response-context";
 import {useRouter} from "next/navigation";
 
 export default function Home() {
-    const [, setWebResponse] = useWebResponse();
     const [shouldFetch, setShouldFetch] = useState(false);
     const router = useRouter();
 
@@ -21,7 +18,7 @@ export default function Home() {
             })
                 .then(res => res.json())
                 .then(data => {
-                    setWebResponse(data as unknown as WebResponse);
+                    localStorage.setItem("webResponse", JSON.stringify(data));
                     setShouldFetch(false);
                     router.replace('/play');
                 })

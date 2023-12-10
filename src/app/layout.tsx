@@ -4,7 +4,6 @@ import './globals.css'
 import '@/styles/styles.css';
 import React from "react";
 import {CookiesProvider} from 'next-client-cookies/server';
-import {WebResponseProvider} from "@/lib/context/web-response-context";
 import {WebRequestProvider} from "@/lib/context/web-request-context";
 
 const inter = Inter({subsets: ['latin']})
@@ -20,9 +19,7 @@ export default function RootLayout({children}: Readonly<{ children: React.ReactN
         <body className={inter.className}>
         <CookiesProvider>
             <WebRequestProvider>
-                <WebResponseProvider>
-                    {children}
-                </WebResponseProvider>
+                {children}
             </WebRequestProvider>
         </CookiesProvider>
         </body>

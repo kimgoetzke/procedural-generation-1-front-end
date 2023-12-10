@@ -1,6 +1,7 @@
-import {Action, WebResponse} from "@/lib/models/WebResponse";
+"use client";
+
+import {Action} from "@/lib/models/WebResponse";
 import {useRouter} from "next/navigation";
-import {useWebResponse} from "@/lib/context/web-response-context";
 import {useEffect, useState} from "react";
 import {useWebRequest} from "@/lib/context/web-request-context";
 import {WebRequest} from "@/lib/models/WebRequest";
@@ -10,7 +11,6 @@ export function ActionsList({actions, playerId}: Readonly<{
     playerId: string
 }>) {
     const [webRequest, setWebRequest] = useWebRequest();
-    const [, setWebResponse] = useWebResponse();
     const [shouldFetch, setShouldFetch] = useState(false);
     const router = useRouter();
 
@@ -25,7 +25,7 @@ export function ActionsList({actions, playerId}: Readonly<{
             })
                 .then(res => res.json())
                 .then(data => {
-                    setWebResponse(data as unknown as WebResponse);
+                    localStorage.setItem("webResponse", JSON.stringify(data));
                     setShouldFetch(false);
                     router.refresh();
                 })
