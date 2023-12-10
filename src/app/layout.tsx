@@ -4,8 +4,8 @@ import './globals.css'
 import '@/styles/styles.css';
 import React from "react";
 import {CookiesProvider} from 'next-client-cookies/server';
-import {WebRequestProvider} from "@/lib/context/web-request-context";
-import {ThemeProvider} from "@/lib/theme-provider";
+import {WebRequestProvider} from "@/components/context/web-request-context";
+import {ThemeProvider} from "@/components/providers/theme-provider";
 import {NavBar} from "@/components/ui/nav-bar";
 
 const inter = Inter({subsets: ['latin']})

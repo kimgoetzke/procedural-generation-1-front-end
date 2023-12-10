@@ -3,7 +3,7 @@
 import {Action} from "@/lib/models/WebResponse";
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
-import {useWebRequest} from "@/lib/context/web-request-context";
+import {useWebRequest} from "@/components/context/web-request-context";
 import {WebRequest} from "@/lib/models/WebRequest";
 import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
@@ -40,7 +40,7 @@ export function ActionsList({actions, playerId}: Readonly<{
                 {actions.map((action: Action) => (
                     <div key={action.index} className="flex justify-between items-center">
                         <div className="flex-shrink-0 p-1 items-start">
-                            <Button className="standard-button"
+                            <Button className="standard-button text-secondary"
                                     onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
                                 {action.index}
                             </Button>

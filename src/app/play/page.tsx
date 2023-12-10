@@ -1,6 +1,6 @@
 "use client";
 
-import {DisplayWebResponse} from "@/lib/components/DisplayWebResponse";
+import {DisplayWebResponse} from "@/components/player/DisplayWebResponse";
 import React, {useEffect, useState} from "react";
 import {WebResponse} from "@/lib/models/WebResponse";
 import Loading from "@/app/loading";

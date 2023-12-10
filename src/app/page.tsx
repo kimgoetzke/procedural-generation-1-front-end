@@ -32,7 +32,7 @@ export default function Home() {
             </div>
             <div className="flex-grow flex items-center justify-center lg:flex">
                 <Button onClick={() => handleClick(setShouldFetch)}
-                        className="standard-button uppercase p-6 font-bold text-3xl">Play
+                        className="standard-button text-secondary uppercase p-6 font-bold text-3xl">Play
                 </Button>
             </div>
         </main>

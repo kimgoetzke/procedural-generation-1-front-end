@@ -1,5 +1,5 @@
 import {EncounterSummary} from "@/lib/models/WebResponse";
-import {CombatantList} from "@/lib/components/CombatantList";
+import {CombatantList} from "@/components/player/CombatantList";
 import {Card} from "@/components/ui/card";
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 

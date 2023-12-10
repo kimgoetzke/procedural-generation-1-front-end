@@ -1,9 +1,9 @@
 import React from "react";
 import {ViewType, WebResponse} from "@/lib/models/WebResponse";
-import {ActionsList} from "@/lib/components/ActionsList";
-import {PlayerBar} from "@/lib/components/PlayerBar";
-import {Interactions} from "@/lib/components/Interactions";
-import {EncounterSummary} from "@/lib/components/EncounterSummary";
+import {ActionsList} from "@/components/player/ActionsList";
+import {PlayerBar} from "@/components/player/PlayerBar";
+import {Interactions} from "@/components/player/Interactions";
+import {EncounterSummary} from "@/components/player/EncounterSummary";
 
 export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebResponse }>) {
     const playerId = webResponse.player.id;
