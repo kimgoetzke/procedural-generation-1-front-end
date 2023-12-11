@@ -26,11 +26,9 @@ export default function Home() {
     }, [shouldFetch]);
 
     return (
-        <main className="flex min-h-screen flex-col items-center justify-start p-24">
-            <div>
-                <h1 className="standard-h1">King of Castrop Rauxel</h1>
-            </div>
-            <div className="flex-grow flex items-center justify-center lg:flex">
+        <main className="flex min-h-screen items-center justify-center">
+            <div className="flex flex-col items-center justify-center">
+                <h1 className="standard-h1 justify-center p-6">Welcome to King of Castrop Rauxel!</h1>
                 <Button onClick={() => handleClick(setShouldFetch)}
                         className="standard-button text-secondary uppercase p-6 font-bold text-3xl">Play
                 </Button>
