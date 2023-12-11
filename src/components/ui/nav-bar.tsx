@@ -12,7 +12,7 @@ import {ModeToggle} from "@/components/ui/mode-toggle";
 
 export function NavBar() {
     return (
-        <div className="w-full flex border-b-2 border-b-accent"> {/* Add fixed top-0 drop-shadow*/}
+        <div className="sticky top-0 z-50 w-full flex border-b-accent border-b bg-background/95 backdrop-blur-sm supports-[backdrop-filter]:bg-background/60">
             <div className="flex flex-grow justify-start p-2">
                 <NavigationMenu>
                     <NavigationMenuList>

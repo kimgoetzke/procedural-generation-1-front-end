@@ -1,6 +1,6 @@
 "use client";
 
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 
@@ -28,9 +28,10 @@ export default function Home() {
     return (
         <main className="flex min-h-screen items-center justify-center">
             <div className="flex flex-col items-center justify-center">
-                <h1 className="standard-h1 justify-center p-6">Welcome to King of Castrop Rauxel!</h1>
+                <h1 className="standard-h1 justify-center p-2">Welcome to King of Castrop Rauxel!</h1>
+                <p className="pb-8 pt-4 text-muted-foreground">A game of skill and chance.</p>
                 <Button onClick={() => handleClick(setShouldFetch)}
-                        className="standard-button text-secondary uppercase p-6 font-bold text-3xl">Play
+                        className="standard-button text-secondary standard-bg-gradient uppercase p-6 font-bold text-3xl">Play
                 </Button>
             </div>
         </main>

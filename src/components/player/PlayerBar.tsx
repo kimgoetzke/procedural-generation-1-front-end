@@ -8,7 +8,7 @@ export function PlayerBar({player}: Readonly<{ player: Player }>) {
                 <div className="flex justify-center mb-2"><span
                     className="player-heading">{player.name.toUpperCase()}</span>
                 </div>
-                <Card className="standard-inner-padding">
+                <Card className="standard-inner-padding border-muted">
                     <div className="grid grid-cols-1 lg:grid-cols-5 items-center">
                         <div className="standard-h3 lg:text-left text-center">
                             <div>{`Health Points`}</div>

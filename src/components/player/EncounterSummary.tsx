@@ -20,11 +20,11 @@ export function EncounterSummary({encounterSummary}: Readonly<{ encounterSummary
                     <CombatantList combatants={encounterSummary.enemiesDefeated} title="Enemies Defeated"/>
                 </div>
                 <div className="standard-outer-padding col-span-2">
-                    <Card className="standard-inner-padding">
+                    <Card className="standard-inner-padding border-muted">
                         <h2 className="standard-h2">Encounter breakdown</h2>
                         <Accordion type="single" collapsible>
                             <AccordionItem value="item-1">
-                                <AccordionTrigger>Click to show/hide</AccordionTrigger>
+                                <AccordionTrigger className="text-muted-foreground">Click to show/hide</AccordionTrigger>
                                 <AccordionContent>
                                     <ul>
                                         {encounterSummary.records.map((record, index) => (

@@ -17,7 +17,7 @@ export default function Play() {
     return (
         <main className="flex flex-col items-center justify-start px-24 py-6">
             <div>
-                <h1 className="standard-h1">King of Castrop Rauxel</h1>
+                <h1 className="standard-h1 py-1">King of Castrop Rauxel</h1>
             </div>
             <div className="w-full xl:w-2/3 2xl:w-1/2 3xl:w-full items-start text-sm lg:flex">
                 {webResponse ? <DisplayWebResponse webResponse={webResponse}/> : <Loading/>}

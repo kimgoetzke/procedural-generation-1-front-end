@@ -3,7 +3,7 @@ import {Card} from "@/components/ui/card";
 
 export const CombatantList = ({combatants, title}: { combatants: Combatant[], title: string }) => (
     <div className="standard-outer-padding">
-        <Card className="standard-inner-padding">
+        <Card className="standard-inner-padding border-muted">
             <h3 className="standard-h2">{title}</h3>
             <ul className="pt-3">
                 {combatants.map((combatant, index) => (

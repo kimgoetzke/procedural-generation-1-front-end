@@ -36,11 +36,11 @@ export function ActionsList({actions, playerId}: Readonly<{
 
     return (
         <div className="standard-outer-padding">
-            <Card className="standard-inner-padding">
+            <Card className="standard-inner-padding border-muted">
                 {actions.map((action: Action) => (
                     <div key={action.index} className="flex justify-between items-center">
                         <div className="flex-shrink-0 p-1 items-start">
-                            <Button className="standard-button text-secondary font-black"
+                            <Button className="standard-button text-secondary font-black standard-bg-gradient"
                                     onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
                                 {action.index}
                             </Button>

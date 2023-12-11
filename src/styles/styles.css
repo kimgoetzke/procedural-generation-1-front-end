@@ -6,8 +6,16 @@
     @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
+.standard-text-gradient { /* Unused */
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-foreground;
+}
+
+.standard-bg-gradient {
+    @apply bg-gradient-to-l from-sky-600 to-sky-500 hover:from-sky-600 hover:to-rose-600;
+}
+
 .standard-h4 {
-    @apply scroll-m-20 text-xl font-semibold tracking-tight;
+    @apply scroll-m-20 text-xl font-semibold tracking-tight py-1;
 }
 
 .standard-p {
@@ -31,7 +39,7 @@
 }
 
 .player-heading {
-    @apply text-primary font-bold uppercase;
+    @apply font-medium uppercase text-muted-foreground;
 }
 
 .standard-list-item {
