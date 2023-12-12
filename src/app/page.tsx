@@ -25,11 +25,10 @@ export default function Home() {
         <main className="flex min-h-screen items-center justify-center">
             <div className="flex flex-col items-center justify-center">
                 <h1 className="standard-h1 justify-center p-2">
-                    Welcome to
-                    <span className="underline underline-offset-4">King of Castrop Rauxel</span>
-                    !
+                    Welcome to <span className="underline underline-offset-4">
+                    King of Castrop Rauxel</span>!
                 </h1>
-                <p className="pt-4 text-muted-foreground">The web implementation of a text-based adventure.</p>
+                <p className="pt-4 text-muted-foreground">The web interface for the text-based adventure game.</p>
                 <p className="pb-8 text-muted-foreground"> Explore a huge, procedurally generated world, complete
                     quests, and engage in combat to get stronger and gain loot.</p>
                 <Button onClick={() => onClickPlay()}

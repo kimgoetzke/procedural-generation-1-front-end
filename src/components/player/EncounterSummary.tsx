@@ -13,18 +13,25 @@ export function EncounterSummary({encounterSummary}: Readonly<{ encounterSummary
                     </p>
                 </Card>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-3">
-                <div className="col-span-1">
-                    <CombatantList combatants={encounterSummary.attackers} title="Attackers"/>
-                    <CombatantList combatants={encounterSummary.defenders} title="Defenders"/>
-                    <CombatantList combatants={encounterSummary.enemiesDefeated} title="Enemies Defeated"/>
+            <div className="grid grid-cols-1">
+                <div className="grid grid-cols-1 lg:grid-cols-3">
+                    <div className="col-span-1 flex flex-col">
+                        <CombatantList combatants={encounterSummary.attackers} title="Attackers"/>
+                    </div>
+                    <div className="col-span-1 flex flex-col">
+                        <CombatantList combatants={encounterSummary.defenders} title="Defenders"/>
+                    </div>
+                    <div className="col-span-1 flex flex-col">
+                        <CombatantList combatants={encounterSummary.enemiesDefeated} title="Enemies Defeated"/>
+                    </div>
                 </div>
-                <div className="standard-outer-padding col-span-2">
+                <div className="standard-outer-padding col-span-full">
                     <Card className="standard-inner-padding border-muted">
                         <h2 className="standard-h2">Encounter breakdown</h2>
                         <Accordion type="single" collapsible>
                             <AccordionItem value="item-1">
-                                <AccordionTrigger className="text-muted-foreground">Click to show/hide</AccordionTrigger>
+                                <AccordionTrigger className="standard-text-gradient font-bold">Click to
+                                    show/hide</AccordionTrigger>
                                 <AccordionContent>
                                     <ul>
                                         {encounterSummary.records.map((record, index) => (
