@@ -7,11 +7,11 @@
 }
 
 .standard-text-gradient { /* Unused */
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary-foreground;
+    @apply text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-amber-600;
 }
 
 .standard-bg-gradient {
-    @apply bg-gradient-to-l from-sky-600 to-sky-500 hover:from-sky-600 hover:to-rose-600;
+    @apply bg-gradient-to-r from-sky-400 to-sky-600 hover:from-amber-400 hover:to-amber-600;
 }
 
 .standard-h4 {
@@ -20,6 +20,26 @@
 
 .standard-p {
     @apply leading-7 [&:not(:first-child)]:mt-6;
+}
+
+.standard-list {
+    @apply my-3 ml-6 list-disc [&>li]:mt-2;
+}
+
+.standard-list-item {
+    @apply text-xs;
+}
+
+.standard-button {
+    @apply transform transition-all duration-200 hover:bg-secondary-foreground hover:scale-110;
+}
+
+.standard-inner-padding {
+    @apply p-3;
+}
+
+.standard-outer-padding {
+    @apply p-1;
 }
 
 .text-highlight-player-bar {
@@ -34,26 +54,6 @@
     @apply text-accent-foreground;
 }
 
-.standard-list {
-    @apply my-3 ml-6 list-disc [&>li]:mt-2;
-}
-
 .player-heading {
     @apply font-medium uppercase text-muted-foreground;
-}
-
-.standard-list-item {
-    @apply text-xs;
-}
-
-.standard-button {
-    @apply transform transition-all duration-500 hover:bg-secondary-foreground hover:scale-110;
-}
-
-.standard-inner-padding {
-    @apply p-3;
-}
-
-.standard-outer-padding {
-    @apply p-1;
 }
