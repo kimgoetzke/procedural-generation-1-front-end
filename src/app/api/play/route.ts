@@ -14,55 +14,67 @@ const getCredentials = (): string => {
 export async function GET(): Promise<Response> {
     console.log("Making GET request");
     // TODO: Make authenticated GET call to backend to get webResponse
-    // const base64Credentials = getCredentials();
-    // const response = await fetch("http://localhost:8080/api/play", {
-    //     next: { revalidate: false },
-    //     method: 'GET',
-    //     headers: {
-    //         'Authorization': `Basic ${base64Credentials}`
-    //     }
-    // });
-    // const data = await response.json() as WebResponse;
-    const data = body as unknown as WebResponse;
-    const webPlayer = toWebPlayer(data);
-    cookies().set({
-        name: 'webPlayer',
-        value: JSON.stringify(webPlayer),
-        httpOnly: false,
-        path: '/',
-        expires: Date.now() + ONE_DAY_IN_MILLISECONDS
-    })
-    return NextResponse.json(data);
+    const base64Credentials = getCredentials();
+    const response = await fetch("http://localhost:8080/api/play", {
+        method: 'GET',
+        headers: {
+            'Authorization': `Basic ${base64Credentials}`
+        }
+    });
+
+    try {
+        const data = await response.json() as WebResponse;
+        // const data = body as unknown as WebResponse;
+        const webPlayer = toWebPlayer(data);
+        cookies().set({
+            name: 'webPlayer',
+            value: JSON.stringify(webPlayer),
+            httpOnly: false,
+            path: '/',
+            expires: Date.now() + ONE_DAY_IN_MILLISECONDS
+        })
+        return NextResponse.json(data);
+    } catch (e) {
+        console.log(e);
+        return response;
+    }
 }
 
 export async function POST(request: Request): Promise<Response> {
     const requestBody = await request.json() as WebRequest;
     if (!requestBody.playerId) {
         console.log("No playerId in request body, returning null...");
-        return NextResponse.json(null);
+        return NextResponse.error()
     }
     console.log("Making POST request with body =", requestBody);
     // TODO: Make authenticated POST call to backend to get webResponse
-    // const base64Credentials = getCredentials();
-    // const response = await fetch("http://localhost:8080/api/play", {
-    //     next: { revalidate: false },
-    //     method: 'POST',
-    //     headers: {
-    //         'Authorization': `Basic ${base64Credentials}`
-    //     },
-    //     body: JSON.stringify(request.body)
-    // });
-    // const data = await response.json() as WebResponse;
-    const data = body as unknown as WebResponse;
-    const webPlayer = toWebPlayer(data);
-    cookies().set({
-        name: 'webPlayer',
-        value: JSON.stringify(webPlayer),
-        httpOnly: false,
-        path: '/',
-        expires: Date.now() + ONE_DAY_IN_MILLISECONDS
-    })
-    return NextResponse.json(data);
+    const base64Credentials = getCredentials();
+    const response = await fetch("http://localhost:8080/api/play", {
+        method: 'POST',
+        body: JSON.stringify(requestBody),
+        headers: {
+            'Authorization': `Basic ${base64Credentials}`,
+            'Content-Type': 'application/json'
+        },
+    });
+
+    try {
+        const data = await response.json() as WebResponse;
+        console.log("POST response =", data)
+        // const data = body as unknown as WebResponse;
+        const webPlayer = toWebPlayer(data);
+        cookies().set({
+            name: 'webPlayer',
+            value: JSON.stringify(webPlayer),
+            httpOnly: false,
+            path: '/',
+            expires: Date.now() + ONE_DAY_IN_MILLISECONDS
+        })
+        return NextResponse.json(data);
+    } catch (e) {
+        console.log(e);
+        return response;
+    }
 }
 
 const body = {

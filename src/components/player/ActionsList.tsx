@@ -7,14 +7,17 @@ import {useWebRequest} from "@/components/context/web-request-context";
 import {WebRequest} from "@/lib/models/WebRequest";
 import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
+import {ErrorResponse} from "@/lib/models/ErrorResponse";
+import {handleResponse} from "@/lib/errorHandler";
 
 export function ActionsList({actions, playerId}: Readonly<{
     actions: Action[],
     playerId: string
 }>) {
+    const router = useRouter();
     const [webRequest, setWebRequest] = useWebRequest();
     const [shouldFetch, setShouldFetch] = useState(false);
-    const router = useRouter();
+    const [error, setError] = useState<ErrorResponse>();
 
     useEffect(() => {
         if (shouldFetch) {
@@ -25,7 +28,7 @@ export function ActionsList({actions, playerId}: Readonly<{
                     'Content-Type': 'application/json'
                 }
             })
-                .then(res => res.json())
+                .then(res => handleResponse(res, setError))
                 .then(data => {
                     localStorage.setItem("webResponse", JSON.stringify(data));
                     setShouldFetch(false);
@@ -33,6 +36,10 @@ export function ActionsList({actions, playerId}: Readonly<{
                 })
         }
     }, [shouldFetch]);
+
+    if (error) {
+        router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
+    }
 
     return (
         <div className="standard-outer-padding">
