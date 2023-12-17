@@ -4,6 +4,7 @@ import {ActionsList} from "@/components/player/ActionsList";
 import {PlayerBar} from "@/components/player/PlayerBar";
 import {Interactions} from "@/components/player/Interactions";
 import {EncounterSummary} from "@/components/player/EncounterSummary";
+import {ErrorPageUsingProps} from "@/app/error/page";
 
 export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebResponse }>) {
     const playerId = webResponse.player.id;
@@ -33,6 +34,9 @@ export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebRes
                 </div>
             );
         default:
-            return ("Something went wrong.");
+            return <ErrorPageUsingProps
+                errorName="Unknown Lambda Error"
+                errorCode="500"
+                errorDescription="Error trying to render the server response."/>;
     }
 }

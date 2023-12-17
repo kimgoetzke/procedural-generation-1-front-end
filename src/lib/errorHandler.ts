@@ -1,12 +1,13 @@
 import {ErrorResponse, toErrorResponse} from "@/lib/models/ErrorResponse";
-import {ERROR_STARTING_GAME} from "@/lib/constants";
+import {DEFAULT_ERROR} from "@/lib/constants";
 
 export function handleResponse(
     res: Response,
-    setError: (value: (((prevState: (ErrorResponse | undefined)) => (ErrorResponse | undefined)) | ErrorResponse | undefined)) => void
+    setError: (value: (((prevState: (ErrorResponse | undefined)) => (ErrorResponse | undefined)) | ErrorResponse | undefined)) => void,
+    description?: string,
 ) {
     if (!res.ok) {
-        setError(toErrorResponse(res, ERROR_STARTING_GAME));
+        setError(toErrorResponse(res, description ?? DEFAULT_ERROR));
     } else {
         return res.json();
     }

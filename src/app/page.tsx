@@ -5,20 +5,21 @@ import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {ErrorResponse} from "@/lib/models/ErrorResponse";
 import {handleResponse} from "@/lib/errorHandler";
+import {ERROR_GET_PLAY} from "@/lib/constants";
 
 export default function Home() {
     const router = useRouter();
     const [error, setError] = useState<ErrorResponse>();
 
     const onClickPlay = () => {
-        console.log("Play clicked");
+        console.log("Play clicked"); // TODO: Find out why button doesn't always react when clicked
         fetch(`/api/play`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => handleResponse(res, setError))
+            .then(res => handleResponse(res, setError, ERROR_GET_PLAY))
             .then(data => {
                 localStorage.setItem("webResponse", JSON.stringify(data));
                 router.replace('/play');
