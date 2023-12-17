@@ -7,5 +7,5 @@ export type ErrorResponse = {
 export const toErrorResponse = (response: Response, description?: string): ErrorResponse => ({
     statusCode: response.status,
     name: response.statusText,
-    description: description || "No error description provided."
+    description: description ?? "No error description provided."
 });

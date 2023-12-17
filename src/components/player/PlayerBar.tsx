@@ -2,11 +2,15 @@ import {Player} from "@/lib/models/WebResponse";
 import {Card} from "@/components/ui/card";
 
 export function PlayerBar({player}: Readonly<{ player: Player }>) {
+    const isDevelopment = process.env.NEXT_PUBLIC_ENVIRONMENT === "dev";
+
     return (
         <div className="standard-outer-padding">
             <div className="w-full pt-6">
-                <div className="flex justify-center mb-2"><span
-                    className="player-heading">{player.name.toUpperCase()}</span>
+                <div className="flex justify-center mb-2">
+                    <span className="player-heading">
+                        {player.name.toUpperCase()} {isDevelopment ?? " in dev mode"}
+                    </span>
                 </div>
                 <Card className="standard-inner-padding border-muted">
                     <div className="grid grid-cols-1 lg:grid-cols-5 items-center">

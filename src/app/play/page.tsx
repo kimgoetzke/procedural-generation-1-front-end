@@ -1,17 +1,20 @@
 "use client";
 
 import {DisplayWebResponse} from "@/components/player/DisplayWebResponse";
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {WebResponse} from "@/lib/models/WebResponse";
 import Loading from "@/app/loading";
+import {useWebResponseStore} from "@/components/store/web-response-store";
 
 export default function Play() {
-    const [webResponse, setWebResponse] = useState<WebResponse | undefined>(undefined);
+    const {webResponse, setWebResponse} = useWebResponseStore();
 
     useEffect(() => {
         const storedResponse = localStorage.getItem("webResponse");
-        const parsedResponse = JSON.parse(storedResponse ?? '{}') as WebResponse;
-        setWebResponse(parsedResponse);
+        if (storedResponse) {
+            const parsedResponse = JSON.parse(storedResponse) as WebResponse;
+            setWebResponse(parsedResponse);
+        }
     }, []);
 
     return (

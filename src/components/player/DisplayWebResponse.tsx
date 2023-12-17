@@ -5,9 +5,16 @@ import {PlayerBar} from "@/components/player/PlayerBar";
 import {Interactions} from "@/components/player/Interactions";
 import {EncounterSummary} from "@/components/player/EncounterSummary";
 import {ErrorPageUsingProps} from "@/app/error/page";
+import LoadingAnimation from "@/components/ui/loading-animation";
 
 export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebResponse }>) {
-    const playerId = webResponse.player.id;
+    const player = webResponse.player;
+
+    if (!player) {
+        return <LoadingAnimation/>;
+    }
+
+    const playerId = player.id;
 
     switch (webResponse.viewType) {
         case ViewType.DEFAULT:
@@ -30,13 +37,13 @@ export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebRes
                 <div className="w-full">
                     <PlayerBar player={webResponse.player}/>
                     <Interactions interactions={webResponse.interactions}/>
-                    <ActionsList actions={webResponse.actions} playerId={playerId}/>
+                    <ActionsList actions={webResponse.actions} playerId={playerId} viewType={webResponse.viewType}/>
                 </div>
             );
         default:
             return <ErrorPageUsingProps
                 errorName="Unknown Lambda Error"
                 errorCode="500"
-                errorDescription="Error trying to render the server response."/>;
+                errorDescription="Unable to render the server response."/>;
     }
 }

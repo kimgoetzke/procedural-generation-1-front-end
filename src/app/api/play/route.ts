@@ -5,12 +5,6 @@ import {toWebPlayer} from "@/lib/models/WebPlayer";
 import {WebResponse} from "@/lib/models/WebResponse";
 import {WebRequest} from "@/lib/models/WebRequest";
 
-const getCredentials = (): string => {
-    const username = 'player1';
-    const password = 'password';
-    return Buffer.from(`${username}:${password}`).toString('base64');
-};
-
 export async function GET(): Promise<Response> {
     console.log("Making GET request");
     // TODO: Make authenticated GET call to backend to get webResponse
@@ -22,30 +16,16 @@ export async function GET(): Promise<Response> {
         }
     });
 
-    try {
-        const data = await response.json() as WebResponse;
-        // const data = body as unknown as WebResponse;
-        const webPlayer = toWebPlayer(data);
-        cookies().set({
-            name: 'webPlayer',
-            value: JSON.stringify(webPlayer),
-            httpOnly: false,
-            path: '/',
-            expires: Date.now() + ONE_DAY_IN_MILLISECONDS
-        })
-        return NextResponse.json(data);
-    } catch (e) {
-        console.log(e);
-        return response;
-    }
+    return await handleBackendResponse(response);
 }
 
 export async function POST(request: Request): Promise<Response> {
     const requestBody = await request.json() as WebRequest;
     if (!requestBody.playerId) {
         console.log("No playerId in request body, returning null...");
-        return NextResponse.error()
+        return NextResponse.error();
     }
+
     console.log("Making POST request with body =", requestBody);
     // TODO: Make authenticated POST call to backend to get webResponse
     const base64Credentials = getCredentials();
@@ -58,11 +38,19 @@ export async function POST(request: Request): Promise<Response> {
         },
     });
 
+    return await handleBackendResponse(response);
+}
+
+const getCredentials = (): string => {
+    const username = 'player1';
+    const password = 'password';
+    return Buffer.from(`${username}:${password}`).toString('base64');
+};
+
+const handleBackendResponse = async (response: Response) => {
+    const data = await response.json();
     try {
-        const data = await response.json() as WebResponse;
-        console.log("POST response =", data)
-        // const data = body as unknown as WebResponse;
-        const webPlayer = toWebPlayer(data);
+        const webPlayer = toWebPlayer(data as WebResponse);
         cookies().set({
             name: 'webPlayer',
             value: JSON.stringify(webPlayer),
@@ -72,10 +60,15 @@ export async function POST(request: Request): Promise<Response> {
         })
         return NextResponse.json(data);
     } catch (e) {
-        console.log(e);
-        return response;
+        console.log("Error handling backend response: ", data);
+        return new Response(JSON.stringify(data), {
+            status: response.status,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
     }
-}
+};
 
 const body = {
     "viewType": "ENCOUNTER_SUMMARY",

@@ -4,7 +4,7 @@ import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
 import {ErrorResponse} from "@/lib/models/ErrorResponse";
-import {handleResponse} from "@/lib/errorHandler";
+import {handleError} from "@/lib/errorHandler";
 import {ERROR_GET_PLAY} from "@/lib/constants";
 
 export default function Home() {
@@ -19,15 +19,18 @@ export default function Home() {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => handleResponse(res, setError, ERROR_GET_PLAY))
-            .then(data => {
-                localStorage.setItem("webResponse", JSON.stringify(data));
-                router.replace('/play');
+            .then(res => handleError(res, setError, ERROR_GET_PLAY))
+            .then(res => {
+                console.log("res " + JSON.stringify(res.status));
+                if (!error) {
+                    const data = res.json();
+                    console.log("xxx " + JSON.stringify(data));
+                    localStorage.setItem("webResponse", JSON.stringify(data));
+                    router.replace('/play');
+                } else {
+                    router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
+                }
             });
-    }
-
-    if (error) {
-        router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
     }
 
     return (
