@@ -41,13 +41,17 @@ export function ActionsList({actions, playerId}: Readonly<{
         router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
     }
 
+    actions.forEach((action: Action) => {
+        action.name = action.name.replace(/\x1B[[(?);]{0,2}(;?\d)*./g, '');
+    });
+
     return (
         <div className="standard-outer-padding">
             <Card className="standard-inner-padding border-muted">
                 {actions.map((action: Action) => (
                     <div key={action.index} className="flex justify-between items-center">
-                        <div className="flex-shrink-0 p-1 items-start">
-                            <Button className="standard-button text-secondary font-black standard-bg-gradient"
+                        <div className="flex-shrink p-1 items-start">
+                            <Button className="standard-button w-10 text-secondary font-black standard-bg-gradient"
                                     onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
                                 {action.index}
                             </Button>
