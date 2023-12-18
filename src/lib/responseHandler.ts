@@ -9,7 +9,7 @@ export async function extractJson(
         return {res, json: data};
     } catch (e) {
         const jsonError = backendErrorFrom(ErrorType.GENERIC, "Error parsing JSON response");
-        return {res, json: jsonError};
+        return {res, json: jsonError as unknown as JSON};
     }
 }
 

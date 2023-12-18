@@ -3,10 +3,10 @@ export enum ErrorType {
     IN_GAME = "IN_GAME",
 }
 
-export type BackendError = {
+export interface BackendError {
     errorType: ErrorType;
     errorMessage: string;
-};
+}
 
 export type FrontendError = {
     statusCode: number;

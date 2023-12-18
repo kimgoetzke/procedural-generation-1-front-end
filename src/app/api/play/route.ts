@@ -1,20 +1,32 @@
 import {NextResponse} from "next/server";
 import {cookies} from "next/headers";
-import {ONE_DAY_IN_MILLISECONDS} from "@/lib/constants";
-import {toWebPlayer} from "@/lib/models/WebPlayer";
+import {toWebPlayer, WebPlayer} from "@/lib/models/WebPlayer";
 import {WebResponse} from "@/lib/models/WebResponse";
 import {WebRequest} from "@/lib/models/WebRequest";
 
 export async function GET(): Promise<Response> {
-    console.log("Making GET request");
+    const cookie = cookies().get("webPlayer");
+    console.log("Making GET /play request for " + (cookie ? `existing player (${cookie.value})` : 'new player'));
+
     // TODO: Make authenticated GET call to backend to get webResponse
     const base64Credentials = getCredentials();
-    const response = await fetch("http://localhost:8080/api/play", {
-        method: 'GET',
-        headers: {
-            'Authorization': `Basic ${base64Credentials}`
-        }
-    });
+    let response: Response;
+    if (!cookie) {
+        response = await fetch(`${process.env.BACKEND_URL}/api/play`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Basic ${base64Credentials}`
+            }
+        });
+    } else {
+        const webPlayer = JSON.parse(cookie.value) as WebPlayer;
+        response = await fetch(`${process.env.BACKEND_URL}/api/play/${webPlayer.id}`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Basic ${base64Credentials}`
+            }
+        });
+    }
 
     return await handleBackendResponse(response);
 }
@@ -22,14 +34,14 @@ export async function GET(): Promise<Response> {
 export async function POST(request: Request): Promise<Response> {
     const requestBody = await request.json() as WebRequest;
     if (!requestBody.playerId) {
-        console.log("No playerId in request body, returning null...");
+        console.log("No playerId in request body for POST /play, returning error...");
         return NextResponse.error();
     }
 
-    console.log("Making POST request with body =", requestBody);
+    console.log("Making POST /play request with body =", requestBody);
     // TODO: Make authenticated POST call to backend to get webResponse
     const base64Credentials = getCredentials();
-    const response = await fetch("http://localhost:8080/api/play", {
+    const response = await fetch(`${process.env.BACKEND_URL}/api/play`, {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -56,11 +68,10 @@ const handleBackendResponse = async (response: Response) => {
             value: JSON.stringify(webPlayer),
             httpOnly: false,
             path: '/',
-            expires: Date.now() + ONE_DAY_IN_MILLISECONDS
         })
         return NextResponse.json(data);
     } catch (e) {
-        console.log("Error handling backend response: ", data);
+        console.log("Error handling backend response: ", data, response.status);
         return new Response(JSON.stringify(data), {
             status: response.status,
             headers: {
@@ -70,7 +81,7 @@ const handleBackendResponse = async (response: Response) => {
     }
 };
 
-const body = {
+const testBody = {
     "viewType": "ENCOUNTER_SUMMARY",
     "actions": [
         {
