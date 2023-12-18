@@ -1,5 +1,3 @@
-'use client';
-
 import {Player} from "@/lib/models/WebResponse";
 import {Card} from "@/components/ui/card";
 
@@ -13,7 +11,9 @@ export function PlayerBar({player}: Readonly<{ player: Player }>) {
                     <span className="player-heading">
                         {player.name.toUpperCase()}
                     </span>
-                    <span className="text-muted-foreground">&nbsp;{isDevelopment ? " (in development mode)" : ""}</span>
+                    <span className="text-muted-foreground font-light">
+                        &nbsp;{isDevelopment ? "in development mode" : ""}
+                    </span>
                 </div>
                 <Card className="standard-inner-padding border-muted">
                     <div className="grid grid-cols-1 lg:grid-cols-5 items-center">

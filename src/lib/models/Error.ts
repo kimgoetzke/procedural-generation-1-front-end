@@ -15,7 +15,12 @@ export type FrontendError = {
     errorType: ErrorType;
 };
 
-export const toErrorResponse = (response: Response, errorType: ErrorType, description?: string): FrontendError => ({
+export const backendErrorFrom = (errorType: ErrorType, description?: string): BackendError => ({
+    errorType: errorType,
+    errorMessage: description ?? "No error description provided.",
+});
+
+export const toFrontendError = (response: Response, errorType: ErrorType, description?: string): FrontendError => ({
     statusCode: response.status,
     name: response.statusText,
     description: description ?? "No error description provided.",

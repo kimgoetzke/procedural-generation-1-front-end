@@ -1,11 +1,16 @@
-import {BackendError, FrontendError, toErrorResponse} from "@/lib/models/Error";
+import {BackendError, backendErrorFrom, ErrorType, FrontendError, toFrontendError} from "@/lib/models/Error";
 import {DEFAULT_ERROR} from "@/lib/constants";
 
 export async function extractJson(
     res: Response,
 ) {
-    const data = await res.json() as JSON;
-    return {res, json: data};
+    try {
+        const data = await res.json() as JSON;
+        return {res, json: data};
+    } catch (e) {
+        const jsonError = backendErrorFrom(ErrorType.GENERIC, "Error parsing JSON response");
+        return {res, json: jsonError};
+    }
 }
 
 export async function handleError(
@@ -23,7 +28,7 @@ export async function handleError(
                 ? `${description} ${backendError.errorMessage}.`
                 : (description ?? backendError.errorMessage) || DEFAULT_ERROR;
         }
-        const errorResponse = toErrorResponse(res, backendError.errorType, errorDescription)
+        const errorResponse = toFrontendError(res, backendError.errorType, errorDescription)
         setError(errorResponse);
         console.log("Error set: ", errorResponse)
     }
