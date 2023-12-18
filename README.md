@@ -39,3 +39,5 @@ future. Some of them are:
    cookie is deleted, the player can no longer play the game.
 2. Not authentication has been implemented. Currently, the game uses hardcoded credentials for `player1`.
 3. The frontend does not handle player deaths (mostly because the backend does not handle them either).
+4. When entering a dialogue with no associated actions, the player will be stuck as the backend won't return any
+   actions, leaving the player with no way to continue to game. This is a backend bug.
