@@ -7,7 +7,7 @@ improve my frontend development skills.
 
 ## How to run
 
-First, run the backend server. In development, the frontend expects the backend to be running on `localhost:8080`.
+First, start up the backend server. In development, the frontend expects the backend to be running on `localhost:8080`.
 Instructions can be found here: [Procedural Generation 1](https://github.com/kimgoetzke/procedural-generation-1).
 
 Then, run the development server:
@@ -17,6 +17,18 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## How to develop
+
+If you want to run the frontend without spinning up the backend, all you can do at this point is:
+
+1. Navigate to `/src/app/api/play/route.ts`
+2. Return the provided `testBody` instead of making API calls
+3. Run the development server
+
+This will always return the same response, regardless of the backend call made. This way, you can work on any
+particular `ViewType` which you can change by editing the `viewType` (`DEFAULT`, `ENCOUNTER_SUMMARY`, `DIALOGUE`)
+field of `testBody`.
 
 ## Limitations
 
