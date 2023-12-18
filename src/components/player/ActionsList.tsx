@@ -51,11 +51,6 @@ export function ActionsList({actions, playerId, viewType}: Readonly<{
         return <InGameAlert error={error} setError={setError}/>;
     }
 
-    // TODO: Fix backend to return actions for dialogue without actions
-    if (viewType === ViewType.DIALOGUE && actions.length === 0) {
-        actions.push({index: 1, name: "Continue"});
-    }
-
     return (
         <div className="standard-outer-padding">
             <Card className="standard-inner-padding border-muted">
