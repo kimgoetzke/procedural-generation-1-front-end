@@ -3,13 +3,14 @@
 import React, {useState} from "react";
 import {useRouter} from "next/navigation";
 import {Button} from "@/components/ui/button";
-import {ErrorResponse} from "@/lib/models/ErrorResponse";
-import {handleError} from "@/lib/errorHandler";
+import {FrontendError} from "@/lib/models/Error";
+import {handleError, extractJson, updateLocalStorage} from "@/lib/responseHandler";
 import {ERROR_GET_PLAY} from "@/lib/constants";
+import {AppRouterInstance} from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 export default function Home() {
     const router = useRouter();
-    const [error, setError] = useState<ErrorResponse>();
+    const [error, setError] = useState<FrontendError>();
 
     const onClickPlay = () => {
         console.log("Play clicked"); // TODO: Find out why button doesn't always react when clicked
@@ -19,18 +20,14 @@ export default function Home() {
                 'Content-Type': 'application/json'
             }
         })
-            .then(res => handleError(res, setError, ERROR_GET_PLAY))
-            .then(res => {
-                console.log("res " + JSON.stringify(res.status));
-                if (!error) {
-                    const data = res.json();
-                    console.log("xxx " + JSON.stringify(data));
-                    localStorage.setItem("webResponse", JSON.stringify(data));
-                    router.replace('/play');
-                } else {
-                    router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
-                }
-            });
+            .then(res => extractJson(res))
+            .then(({res, json}) => handleError(res, json, setError, ERROR_GET_PLAY))
+            .then(({res, json}) => updateLocalStorage(res, json))
+            .then(({res, json}) => startGame(res, json, router));
+    }
+
+    if (error) {
+        router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
     }
 
     return (
@@ -50,4 +47,15 @@ export default function Home() {
             </div>
         </main>
     )
-}
+};
+
+const startGame = async (
+    res: Response,
+    json: JSON,
+    router: AppRouterInstance
+) => {
+    if (res.ok) {
+        router.replace('/play');
+    }
+    return {res, json};
+};

@@ -7,10 +7,11 @@ import {useWebRequest} from "@/components/context/web-request-context";
 import {WebRequest} from "@/lib/models/WebRequest";
 import {Button} from "@/components/ui/button";
 import {Card} from "@/components/ui/card";
-import {ErrorResponse} from "@/lib/models/ErrorResponse";
-import {handleError} from "@/lib/errorHandler";
+import {ErrorType, FrontendError} from "@/lib/models/Error";
+import {extractJson, handleError, updateLocalStorage} from "@/lib/responseHandler";
 import {useWebResponseStore} from "@/components/store/web-response-store";
 import {ERROR_POST_PLAY} from "@/lib/constants";
+import {InGameAlert} from "@/components/player/InGameAlert";
 
 export function ActionsList({actions, playerId, viewType}: Readonly<{
     actions: Action[],
@@ -20,7 +21,7 @@ export function ActionsList({actions, playerId, viewType}: Readonly<{
     const router = useRouter();
     const [webRequest, setWebRequest] = useWebRequest();
     const [shouldFetch, setShouldFetch] = useState(false);
-    const [error, setError] = useState<ErrorResponse>();
+    const [error, setError] = useState<FrontendError>();
     const {setWebResponse} = useWebResponseStore();
 
     useEffect(() => {
@@ -32,26 +33,28 @@ export function ActionsList({actions, playerId, viewType}: Readonly<{
                     'Content-Type': 'application/json'
                 }
             })
-                .then(res => handleError(res, setError, ERROR_POST_PLAY))
-                .then(data => {
-                    localStorage.setItem("webResponse", JSON.stringify(data));
+                .then(res => extractJson(res))
+                .then(({res, json}) => handleError(res, json, setError, ERROR_POST_PLAY))
+                .then(({res, json}) => updateLocalStorage(res, json))
+                .then(({res, json}) => {
                     setShouldFetch(false);
-                    setWebResponse(data);
+                    if (res.ok) {
+                        setWebResponse(json);
+                    }
                 });
         }
     }, [shouldFetch]);
 
-    if (error) {
+    if (error?.errorType === ErrorType.GENERIC) {
         router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
+    } else if (error?.errorType === ErrorType.IN_GAME) {
+        return <InGameAlert error={error} setError={setError}/>;
     }
 
+    // TODO: Fix backend to return actions for dialogue without actions
     if (viewType === ViewType.DIALOGUE && actions.length === 0) {
         actions.push({index: 1, name: "Continue"});
     }
-
-    actions.forEach((action: Action) => {
-        action.name = action.name.replace(/\x1B[[(?);]{0,2}(;?\d)*./g, '');
-    });
 
     return (
         <div className="standard-outer-padding">
@@ -78,6 +81,7 @@ const handleClick = (
     setWebRequest: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void,
     setShouldFetch: (value: (((prevState: boolean) => boolean) | boolean)) => void
 ) => {
+    console.log(`Selected action ${index}`);
     setWebRequest({choice: index, playerId: playerId});
     setShouldFetch(true);
-}
+};
