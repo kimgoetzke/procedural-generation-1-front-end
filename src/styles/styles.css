@@ -6,6 +6,10 @@
     @apply scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0;
 }
 
+.standard-h3 {
+    @apply scroll-m-20 text-sm tracking-tight text-muted-foreground;
+}
+
 .standard-text-gradient {
     @apply text-transparent bg-clip-text bg-gradient-to-r from-sky-400 to-sky-600 hover:from-amber-400 hover:to-amber-600;
 }

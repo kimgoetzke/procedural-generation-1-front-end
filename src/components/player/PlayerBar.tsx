@@ -16,20 +16,24 @@ export function PlayerBar({player}: Readonly<{ player: Player }>) {
                     </span>
                 </div>
                 <Card className="standard-inner-padding border-muted">
-                    <div className="grid grid-cols-1 lg:grid-cols-5 items-center">
-                        <div className="standard-h3 lg:text-left text-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-6 items-center">
+                        <div className="standard-h3 lg:text-left text-center pb-2 lg:pb-0">
                             <div>{`Health Points`}</div>
                             <div className="text-highlight-player-bar">{`${player.health} / ${player.maxHealth}`}</div>
                         </div>
-                        <div className="standard-h3 text-center">
+                        <div className="standard-h3 text-center pb-2 lg:pb-0">
                             <div>{`Experience`}</div>
                             <div className="text-highlight-player-bar">{player.experience}</div>
                         </div>
-                        <div className="standard-h3 text-center">
+                        <div className="standard-h3 text-center pb-2 lg:pb-0">
                             <div>{`Level`}</div>
                             <div className="text-highlight-player-bar">{player.level}</div>
                         </div>
-                        <div className="standard-h3 text-center">
+                        <div className="standard-h3 text-center pb-2 lg:pb-0">
+                            <div>{`Gold`}</div>
+                            <div className="text-highlight-player-bar">{player.gold}</div>
+                        </div>
+                        <div className="standard-h3 text-center pb-2 lg:pb-0">
                             <div>{`Location`}</div>
                             <div>
                                 {`(x: `}
@@ -39,7 +43,7 @@ export function PlayerBar({player}: Readonly<{ player: Player }>) {
                                 <span>{`)`}</span>
                             </div>
                         </div>
-                        <div className="standard-h3 lg:text-right text-center">
+                        <div className="standard-h3 lg:text-right text-center pb-2 lg:pb-0">
                             <div>
                                 <span className="text-highlight-player-bar">{player.poiName}</span>
                                 {`, `}
