@@ -23,7 +23,7 @@ const getError = (errorName: string | null, errorCode: string | null, errorDescr
                 </AlertDescription>
             </Alert>
             <div className="py-4">
-                <Link className={buttonVariants({variant: "destructive"})} href="/">Home</Link>
+                <Link className={buttonVariants({variant: "destructive"})} href="/">Back home</Link>
             </div>
         </div>
     </div>

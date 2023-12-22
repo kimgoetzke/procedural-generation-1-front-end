@@ -6,6 +6,7 @@ import {Interactions} from "@/components/player/Interactions";
 import {EncounterSummary} from "@/components/player/EncounterSummary";
 import {ErrorPageUsingProps} from "@/app/error/page";
 import LoadingAnimation from "@/components/ui/loading-animation";
+import {GameOver} from "@/components/player/GameOver";
 
 export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebResponse }>) {
     const player = webResponse.player;
@@ -32,12 +33,20 @@ export function DisplayWebResponse({webResponse}: Readonly<{ webResponse: WebRes
                     <ActionsList actions={webResponse.actions} playerId={playerId}/>
                 </div>
             );
+        case ViewType.GAME_OVER:
+            return (
+                <div className="w-full">
+                    <PlayerBar player={webResponse.player}/>
+                    <EncounterSummary encounterSummary={webResponse.encounterSummary}/>
+                    <GameOver/>
+                </div>
+            );
         case ViewType.DIALOGUE:
             return (
                 <div className="w-full">
                     <PlayerBar player={webResponse.player}/>
                     <Interactions interactions={webResponse.interactions}/>
-                    <ActionsList actions={webResponse.actions} playerId={playerId} viewType={webResponse.viewType}/>
+                    <ActionsList actions={webResponse.actions} playerId={playerId}/>
                 </div>
             );
         default:

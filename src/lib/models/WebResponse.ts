@@ -9,6 +9,7 @@ export type WebResponse = {
 export enum ViewType {
     DEFAULT = "DEFAULT",
     ENCOUNTER_SUMMARY = "ENCOUNTER_SUMMARY",
+    GAME_OVER = "GAME_OVER",
     DIALOGUE = "DIALOGUE",
 }
 

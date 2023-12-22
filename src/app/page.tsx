@@ -13,7 +13,7 @@ export default function Home() {
     const [error, setError] = useState<FrontendError>();
 
     const onClickPlay = () => {
-        console.log("Play clicked"); // TODO: Find out why button doesn't always react when clicked
+        console.log("Clicked 'Play' button"); // TODO: Find out why button doesn't always react when clicked
         fetch(`/api/play`, {
             method: 'GET',
             headers: {

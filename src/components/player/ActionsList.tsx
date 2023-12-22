@@ -1,6 +1,6 @@
 "use client";
 
-import {Action, ViewType} from "@/lib/models/WebResponse";
+import {Action} from "@/lib/models/WebResponse";
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {useWebRequest} from "@/components/context/web-request-context";
@@ -13,10 +13,9 @@ import {useWebResponseStore} from "@/components/store/web-response-store";
 import {ERROR_POST_PLAY} from "@/lib/constants";
 import {InGameAlert} from "@/components/player/InGameAlert";
 
-export function ActionsList({actions, playerId, viewType}: Readonly<{
+export function ActionsList({actions, playerId}: Readonly<{
     actions: Action[],
     playerId: string
-    viewType?: ViewType
 }>) {
     const router = useRouter();
     const [webRequest, setWebRequest] = useWebRequest();
@@ -57,7 +56,7 @@ export function ActionsList({actions, playerId, viewType}: Readonly<{
                 {actions.map((action: Action) => (
                     <div key={action.index} className="flex justify-between items-center">
                         <div className="flex-shrink p-1 items-start">
-                            <Button className="standard-button w-10 text-secondary font-black standard-bg-gradient"
+                            <Button className="standard-button w-10 text-secondary standard-bg-gradient"
                                     onClick={() => handleClick(action.index, playerId, setWebRequest, setShouldFetch)}>
                                 {action.index}
                             </Button>
@@ -76,7 +75,7 @@ const handleClick = (
     setWebRequest: (value: (((prevState: WebRequest) => WebRequest) | WebRequest)) => void,
     setShouldFetch: (value: (((prevState: boolean) => boolean) | boolean)) => void
 ) => {
-    console.log(`Selected action ${index}`);
+    console.log(`Selected action: ${index}`);
     setWebRequest({choice: index, playerId: playerId});
     setShouldFetch(true);
 };

@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import {DisplayWebResponse} from "@/components/player/DisplayWebResponse";
 import React, {useEffect} from "react";
@@ -18,8 +18,8 @@ export default function Play() {
     }, []);
 
     return (
-        <main className="flex flex-col items-center justify-start px-24 py-6">
-            <div className="w-full xl:w-2/3 2xl:w-1/2 3xl:w-full items-start text-sm lg:flex">
+        <main className="flex flex-col items-center justify-start px-5 md:px-16 lg:px-24 py-6">
+            <div className="w-full xl:w-2/3 3xl:w-1/2 items-start text-sm lg:flex">
                 {webResponse ? <DisplayWebResponse webResponse={webResponse}/> : <Loading/>}
             </div>
         </main>
