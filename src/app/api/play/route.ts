@@ -53,7 +53,7 @@ export async function POST(request: Request): Promise<Response> {
     return await handleBackendResponse(response);
 }
 
-const getCredentials = (): string => {
+export const getCredentials = (): string => {
     const username = 'player1';
     const password = 'password';
     return Buffer.from(`${username}:${password}`).toString('base64');
