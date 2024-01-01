@@ -1,5 +1,7 @@
 # Procedural Generation 1 Frontend
 
+![pro_gen_fe_banner](https://github.com/kimgoetzke/procedural-generation-1-front-end/assets/120580433/f7392d7c-0dfe-4234-bce1-b4ebb32ea792)
+
 This repository contains the frontend for
 the [Procedural Generation 1](https://github.com/kimgoetzke/procedural-generation-1) project. It is a Next.js
 application that uses Typescript, Shadcn, Lucide React, Tailwind CSS, and Zustand. The purpose of this project was to
