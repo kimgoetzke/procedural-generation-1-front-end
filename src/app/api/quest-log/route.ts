@@ -6,7 +6,7 @@ import {NextResponse} from "next/server";
 export async function GET(): Promise<Response> {
     const cookie = cookies().get("webPlayer");
     console.log("Making GET /play/{playerId}/quest-log request " + (
-        cookie ? `for ${cookie.value}` : ' but webPlayer cookie is not present'
+        cookie ? `for ${cookie.value}` : 'but webPlayer cookie is not present'
     ));
 
     // TODO: Make authenticated GET call to backend to get webResponse

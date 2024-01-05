@@ -17,14 +17,17 @@ import {useState} from "react";
 import {FrontendError} from "@/lib/models/Error";
 import {QuestLog} from "@/lib/models/QuestLog";
 import {QuestLogDrawer} from "../player/QuestLogDrawer";
+import {useWebResponseStore} from "@/components/store/web-response-store";
 
 export function NavBar() {
     const router = useRouter();
     const [error, setError] = useState<FrontendError>();
     const [questLog, setQuestLog] = useState<QuestLog>();
+    const {webResponse} = useWebResponseStore();
 
     const onClickQuestLog = () => {
         console.log("Clicked 'Quest log' button");
+        setQuestLog(undefined);
         fetch(`/api/quest-log`, {
             method: 'GET',
             headers: {
@@ -36,17 +39,12 @@ export function NavBar() {
             .then(({res, json}) => {
                 if (res.ok) {
                     setQuestLog(json as unknown as QuestLog);
-                    console.log("xxx =", json);
                 }
             });
     }
 
     if (error) {
         router.replace(`/error?code=${error.statusCode}&name=${error.name}&desc=${error.description}`);
-    }
-
-    if (questLog) {
-        return <QuestLogDrawer questLog={questLog} setQuestLog={setQuestLog}/>;
     }
 
     return (
@@ -66,17 +64,19 @@ export function NavBar() {
                 </NavigationMenu>
             </div>
             <div className="flex flex-grow justify-center p-2">
-                <NavigationMenu>
-                    <NavigationMenuList>
-                        <NavigationMenuItem>
-                            <Button
-                                onClick={() => onClickQuestLog()}
-                                className='standard-button text-secondary standard-bg-gradient'>
-                                Quest log
-                            </Button>
-                        </NavigationMenuItem>
-                    </NavigationMenuList>
-                </NavigationMenu>
+                {webResponse != null /*&& Object.keys(webResponse).length !== 0*/ &&
+                    <NavigationMenu>
+                        <NavigationMenuList>
+                            <NavigationMenuItem>
+                                <Button
+                                    onClick={() => onClickQuestLog()}
+                                    className='standard-button text-secondary standard-bg-gradient'>
+                                    Quest log
+                                </Button>
+                            </NavigationMenuItem>
+                        </NavigationMenuList>
+                    </NavigationMenu>
+                }
             </div>
             <div className="flex flex-grow justify-end p-2">
                 <NavigationMenu>
@@ -87,6 +87,7 @@ export function NavBar() {
                     </NavigationMenuList>
                 </NavigationMenu>
             </div>
+            {questLog && <QuestLogDrawer questLog={questLog}/>}
         </div>
     );
 }

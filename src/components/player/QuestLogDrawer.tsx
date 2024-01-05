@@ -12,25 +12,24 @@ import {Button} from "@/components/ui/button";
 import {QuestLog} from "@/lib/models/QuestLog";
 
 export function QuestLogDrawer(
-    {questLog, setQuestLog}: Readonly<{
+    {questLog}: Readonly<{
         questLog: QuestLog,
-        setQuestLog: React.Dispatch<React.SetStateAction<QuestLog | undefined>>
     }>
 ) {
+    const [open, setOpen] = React.useState(true);
     return (
-        <Drawer open={true} onOpenChange={() => setQuestLog(undefined)}>
-            <DrawerContent>
-                <DrawerClose>
-                    <button>Close Drawer</button>
-                </DrawerClose>
+        <Drawer open={open} onOpenChange={setOpen}>
+            <DrawerContent className="md:mx-16 md:px-16">
                 <DrawerHeader>
-                    <DrawerTitle>Cannot complete action</DrawerTitle>
+                    <DrawerTitle className="pb-4">Quest log</DrawerTitle>
                     <DrawerDescription>
-                        {JSON.stringify(questLog)}
+                        {JSON.stringify(questLog, null, 2)}
                     </DrawerDescription>
                 </DrawerHeader>
                 <DrawerFooter>
-                    <Button>OK</Button>
+                    <DrawerClose>
+                        <Button variant="outline">Close quest log</Button>
+                    </DrawerClose>
                 </DrawerFooter>
             </DrawerContent>
         </Drawer>
