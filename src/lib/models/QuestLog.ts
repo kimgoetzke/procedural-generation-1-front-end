@@ -14,4 +14,4 @@ export type Quest = {
         location: string
         poi: string
     }
-}
+};

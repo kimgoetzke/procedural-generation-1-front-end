@@ -64,7 +64,7 @@ export function NavBar() {
                 </NavigationMenu>
             </div>
             <div className="flex flex-grow justify-center p-2">
-                {webResponse != null /*&& Object.keys(webResponse).length !== 0*/ &&
+                {webResponse != null && Object.keys(webResponse).length !== 0 &&
                     <NavigationMenu>
                         <NavigationMenuList>
                             <NavigationMenuItem>
