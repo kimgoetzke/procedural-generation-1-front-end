@@ -10,23 +10,23 @@ export async function GET(): Promise<Response> {
     ));
 
     // TODO: Make authenticated GET call to backend to get webResponse
-    // const base64Credentials = getCredentials();
-    // let response: Response;
-    // if (!cookie) {
-    //     console.log("No playerId in request body for POST /play, returning error...");
-    //     return NextResponse.error();
-    // } else {
-    //     const webPlayer = JSON.parse(cookie.value) as WebPlayer;
-    //     response = await fetch(`${process.env.BACKEND_URL}/api/play/${webPlayer.id}/quest-log`, {
-    //         method: 'GET',
-    //         headers: {
-    //             'Authorization': `Basic ${base64Credentials}`
-    //         }
-    //     });
-    // }
+    const base64Credentials = getCredentials();
+    let response: Response;
+    if (!cookie) {
+        console.log("No playerId in request body for POST /play, returning error...");
+        return NextResponse.error();
+    } else {
+        const webPlayer = JSON.parse(cookie.value) as WebPlayer;
+        response = await fetch(`${process.env.BACKEND_URL}/api/play/${webPlayer.id}/quest-log`, {
+            method: 'GET',
+            headers: {
+                'Authorization': `Basic ${base64Credentials}`
+            }
+        });
+    }
 
-    // return response;
-    return NextResponse.json(body);
+    return response;
+    // return NextResponse.json(body);
 }
 
 const body = [
