@@ -1,18 +1,21 @@
 # Procedural Generation 1 Frontend
 
-![pro_gen_fe_banner](https://github.com/kimgoetzke/procedural-generation-1-front-end/assets/120580433/f7392d7c-0dfe-4234-bce1-b4ebb32ea792)
-
 This repository contains the frontend for
-the [Procedural Generation 1](https://github.com/kimgoetzke/procedural-generation-1) project. It is a Next.js
+the [Procedural Generation 1](https://github.com/kimgoetzke/procedural-generation-1) project. It is a Next.js 14
 application that uses Typescript, Shadcn, Lucide React, Tailwind CSS, and Zustand. The purpose of this project was to
-improve my frontend development skills.
+improve my frontend development skills e.g. by using common front-end technologies I hadn't used before and by using a
+common front-end components/features such as data tables, light/dark modes, reusable components.
+
+![Demo GIF](./assets/demo.gif)
 
 ## How to run
+
+### Running with the backend (recommended)
 
 First, start up the backend server. In development, the frontend expects the backend to be running on `localhost:8080`.
 Instructions can be found here: [Procedural Generation 1](https://github.com/kimgoetzke/procedural-generation-1).
 
-Then, run the development server:
+Then, run the frontend development server:
 
 ```shell
 npm run dev
@@ -20,24 +23,39 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## How to develop
+### Running without the backend
 
 If you want to run the frontend without spinning up the backend, all you can do at this point is:
 
-1. Navigate to `/src/app/api/play/route.ts`
-2. Return the provided `testBody` instead of making API calls
-3. Run the development server
+1. Open `/src/app/api/play/route.ts` and return the provided `testBody` instead of making API calls*
+2. Open `/src/app/api/quest-log/route.ts` and return the provided `testBody` instead of making API calls*
+3. Run the development server with:
 
-This will always return the same response, regardless of the backend call made. This way, you can work on any
-particular `ViewType` which you can change by editing the `viewType` (`DEFAULT`, `ENCOUNTER_SUMMARY`, `DIALOGUE`)
-field of `testBody`.
+```shell
+npm run dev
+```
+
+*You can do this by commenting out any `fetch` and the return statement, and returning `NextResponse.json(testBody)`
+instead. By doing this, you will, of course, always return the same response, regardless of the backend call made. For
+the `play` routes, you can then change the `viewType` of the `testBody` to see different views/screens and work on them.
+
+![Demo GIF](./assets/banner.png)
 
 ## Limitations
 
-This project is a work in progress. It has a large number of known limitations which will have to be implemented in the
-future. Some of them are:
+This project has many limitations. It was a practice project and was never intended to become a polished website. Some
+of the limitations are:
 
-1. Playing the game requires the player to be new or to have a `webPlayer` cookie (dropped after first login). If this
-   cookie is deleted, the player can no longer play the game.
-2. No authentication has been implemented. Currently, the game uses hardcoded credentials for `player1`.
-3. The frontend does not handle player deaths (mostly because the backend does not handle them either).
+1. No authentication has been implemented. Currently, the game uses hardcoded credentials for `player1`. This is
+   partially because the backend also doesn't really user sign-up, etc. However,
+   see [github.com/kimgoetzke/practice-next-auth](https://github.com/kimgoetzke/practice-next-auth) for a project where
+   I implemented authentication using NextAuth.
+2. You must run the
+   backend ([github.com/kimgoetzke/procedural-generation-1](https://github.com/kimgoetzke/procedural-generation-1))
+   locally alongside the frontend.
+3. Playing the "game" requires the player to be new or to have a `webPlayer` cookie (dropped after first login). If this
+   cookie is deleted, the player can no longer play the game (at least not without rebooting the backend).
+4. The UX is lacking (e.g. too many clicks) because the backend was built as an CLI application. The UI is boring and
+   unlikely to be following best practice for UI design. The application could be improved to feel more juicy (e.g.
+   animations and colours) and accessible (e.g. better layout).
+

@@ -9,7 +9,7 @@ export async function GET(): Promise<Response> {
         cookie ? `for ${cookie.value}` : 'but webPlayer cookie is not present'
     ));
 
-    // TODO: Make authenticated GET call to backend to get webResponse
+    // TODO: Make authenticated GET call to backend to get webResponse instead of using hardcoded credentials
     const base64Credentials = getCredentials();
     let response: Response;
     if (!cookie) {
@@ -26,10 +26,9 @@ export async function GET(): Promise<Response> {
     }
 
     return response;
-    // return NextResponse.json(body);
 }
 
-const body = [
+const testBody = [
     {
         "about": "a delivery",
         "eventType": "REACH",

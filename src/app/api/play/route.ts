@@ -8,7 +8,7 @@ export async function GET(): Promise<Response> {
     const cookie = cookies().get("webPlayer");
     console.log("Making GET /play request for " + (cookie ? `existing player (${cookie.value})` : 'new player'));
 
-    // TODO: Make authenticated GET call to backend to get webResponse
+    // TODO: Make authenticated GET call to backend to get webResponse instead of using hardcoded credentials
     const base64Credentials = getCredentials();
     let response: Response;
     if (!cookie) {
@@ -39,7 +39,7 @@ export async function POST(request: Request): Promise<Response> {
     }
 
     console.log("Making POST /play request with body =", requestBody);
-    // TODO: Make authenticated POST call to backend to get webResponse
+    // TODO: Make authenticated GET call to backend to get webResponse instead of using hardcoded credentials
     const base64Credentials = getCredentials();
     const response = await fetch(`${process.env.BACKEND_URL}/api/play`, {
         method: 'POST',
